@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anas — Career Guidance for Every Student</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233F;
+    --ink-2:#1F3157;
+    --paper:#FBF1DE;
+    --paper-2:#F3E6C8;
+    --gold:#F2A93B;
+    --gold-dark:#C9821D;
+    --green:#1F6F5C;
+    --green-light:#3D9C82;
+    --line: rgba(251,241,222,0.22);
+    --ink-line: rgba(22,35,63,0.14);
+    --shadow: 0 20px 40px rgba(16,24,44,0.18);
+    --radius: 18px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0 0 .4em 0;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:.72rem;
+    font-weight:500;
+    color:var(--gold-dark);
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+  :focus-visible{outline:3px solid var(--green); outline-offset:3px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1160px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Fraunces', serif; font-size:1.3rem; font-weight:600;}
+  .brand-mark{
+    width:34px; height:34px; border-radius:50%;
+    background:conic-gradient(from 210deg, var(--gold), var(--green-light), var(--gold));
+    flex:none;
+  }
+  nav.links{display:flex; gap:26px; font-size:.92rem; font-weight:600;}
+  nav.links a{text-decoration:none; opacity:.85; padding:6px 2px; border-bottom:2px solid transparent;}
+  nav.links a:hover{opacity:1; border-color:var(--gold);}
+  .nav-cta{
+    background:var(--gold); color:var(--ink); font-weight:700; font-size:.85rem;
+    padding:10px 18px; border-radius:30px; text-decoration:none; white-space:nowrap;
+  }
+  .nav-toggle{display:none;}
+  @media (max-width: 880px){
+    nav.links{display:none;}
+    .nav-toggle{display:block; background:none; border:1px solid var(--line); color:var(--paper); border-radius:8px; padding:8px 12px; font-size:1rem;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    background:linear-gradient(180deg, var(--ink) 0%, var(--ink-2) 62%, var(--paper) 62%);
+    color:var(--paper);
+    padding:76px 0 0;
+  }
+  .hero-inner{
+    max-width:1160px; margin:0 auto; padding:0 28px;
+    display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center;
+  }
+  .hero h1{font-size:clamp(2.2rem, 4.4vw, 3.4rem); color:var(--paper); max-width:12ch;}
+  .hero h1 em{font-style:normal; color:var(--gold);}
+  .hero p.lede{font-size:1.08rem; max-width:46ch; color:rgba(251,241,222,0.86);}
+  .hero-ctas{display:flex; gap:14px; margin-top:26px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 24px; border-radius:30px; font-weight:700; font-size:.95rem;
+    text-decoration:none; border:2px solid transparent; cursor:pointer;
+  }
+  .btn-primary{background:var(--gold); color:var(--ink);}
+  .btn-primary:hover{background:#ffbf5a;}
+  .btn-outline{border-color:rgba(251,241,222,0.5); color:var(--paper);}
+  .btn-outline:hover{border-color:var(--paper);}
+  .btn-green{background:var(--green); color:var(--paper);}
+  .btn-green:hover{background:var(--green-light);}
+
+  .sunrise-wrap{position:relative; height:340px;}
+  .sunrise-wrap svg{width:100%; height:100%;}
+  .sun{ transform-origin:center; }
+  @keyframes rise{ from{ transform:translateY(26px); opacity:0;} to{ transform:translateY(0); opacity:1;} }
+  .sun, .ray, .hill{ animation:rise 1.1s ease-out both; }
+  .ray{ animation-delay:.15s; }
+  .hill2{ animation-delay:.1s; }
+
+  .hero-strip{
+    background:var(--paper);
+    padding:20px 0 46px;
+  }
+  .strip-grid{
+    max-width:1160px; margin:0 auto; padding:0 28px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+  }
+  .strip-item{
+    font-family:'IBM Plex Mono', monospace; font-size:.8rem; color:var(--ink);
+    border-left:2px solid var(--gold-dark); padding-left:12px;
+  }
+  .strip-item b{display:block; font-family:'Fraunces', serif; font-size:1.05rem; font-weight:600; margin-bottom:2px;}
+  @media (max-width: 800px){ .hero-inner{grid-template-columns:1fr;} .sunrise-wrap{height:220px;} .strip-grid{grid-template-columns:repeat(2,1fr);} }
+
+  /* ---------- SECTION SHELLS ---------- */
+  section{padding:84px 0;}
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head h2{font-size:clamp(1.7rem, 3vw, 2.3rem);}
+  .band-dark{background:var(--ink); color:var(--paper);}
+  .band-dark .eyebrow{color:var(--gold);}
+  .band-green{background:var(--green); color:var(--paper);}
+
+  /* ---------- VIDEOS ---------- */
+  .video-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:24px;}
+  .video-feature{
+    background:var(--ink); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+  }
+  .video-feature .frame-wrap{position:relative; padding-top:56.25%; background:#000;}
+  .video-feature iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+  .video-feature .cap{padding:18px 20px; color:var(--paper);}
+  .video-feature .cap .eyebrow{color:var(--gold);}
+  .video-list{display:flex; flex-direction:column; gap:16px;}
+  .video-card{
+    display:grid; grid-template-columns:104px 1fr; gap:14px;
+    background:#fff; border:1px solid var(--ink-line); border-radius:14px; padding:12px;
+    text-decoration:none; color:var(--ink); transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .video-card:hover{transform:translateY(-2px); box-shadow:var(--shadow);}
+  .video-thumb{
+    width:104px; height:74px; border-radius:9px; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .video-thumb::after{
+    content:"▶"; color:#fff; font-size:.85rem; width:30px; height:30px; border-radius:50%;
+    background:rgba(0,0,0,0.55); display:flex; align-items:center; justify-content:center;
+  }
+  .video-card h4{margin:0 0 4px; font-family:'Fraunces', serif; font-size:.98rem; font-weight:600;}
+  .video-card span{font-size:.8rem; color:#5b6376;}
+
+  /* ---------- POSTERS ---------- */
+  .poster-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:20px;}
+  .poster{
+    border-radius:var(--radius); padding:22px; min-height:280px; color:var(--paper);
+    position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between;
+    box-shadow:var(--shadow);
+  }
+  .poster .eyebrow{color:rgba(255,255,255,0.85);}
+  .poster h3{font-size:1.35rem; color:#fff; margin-bottom:.15em;}
+  .poster p{font-size:.85rem; color:rgba(255,255,255,0.88); margin:0;}
+  .poster .tag{
+    align-self:flex-start; font-family:'IBM Plex Mono', monospace; font-size:.68rem;
+    background:rgba(0,0,0,0.22); padding:4px 10px; border-radius:20px; margin-bottom:14px;
+  }
+  .poster-1{background:radial-gradient(120% 140% at 100% 0%, #2E8F6E 0%, #17513E 70%);}
+  .poster-2{background:radial-gradient(120% 140% at 0% 100%, #F2A93B 0%, #B9700F 75%); }
+  .poster-2 .eyebrow, .poster-2 .tag{color:rgba(23,25,20,0.75); background:rgba(0,0,0,0.14);}
+  .poster-2 h3, .poster-2 p{color:#20180A;}
+  .poster-3{background:radial-gradient(120% 140% at 100% 100%, #345C9C 0%, #16233F 75%);}
+  .poster-4{background:radial-gradient(120% 140% at 0% 0%, #C4432B 0%, #7E2415 75%);}
+  .poster-deco{position:absolute; inset:0; opacity:.5; pointer-events:none;}
+  @media (max-width: 980px){ .poster-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width: 560px){ .poster-grid{grid-template-columns:1fr;} }
+
+  /* ---------- HOTSPOT PATH ---------- */
+  .path-wrap{position:relative;}
+  .path-svg{position:absolute; left:0; top:0; width:100%; height:100%; z-index:0;}
+  .path-list{
+    position:relative; z-index:1;
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:28px 26px;
+  }
+  .stop{
+    background:var(--paper); border:1px solid var(--ink-line); border-radius:16px; padding:22px;
+    text-decoration:none; color:var(--ink); display:block; position:relative;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .stop:hover{transform:translateY(-3px); box-shadow:var(--shadow); border-color:var(--gold-dark);}
+  .stop .num{
+    font-family:'IBM Plex Mono', monospace; font-size:.75rem; color:var(--paper);
+    background:var(--green); width:30px; height:30px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+  }
+  .stop h4{font-family:'Fraunces', serif; font-size:1.08rem; margin:0 0 6px; font-weight:600;}
+  .stop p{font-size:.86rem; color:#4b5163; margin:0 0 14px;}
+  .stop .go{font-family:'IBM Plex Mono', monospace; font-size:.74rem; color:var(--gold-dark); font-weight:500;}
+  @media (max-width: 860px){ .path-list{grid-template-columns:1fr 1fr;} }
+  @media (max-width: 560px){ .path-list{grid-template-columns:1fr;} }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .step{padding:26px 22px; border-radius:16px; background:rgba(251,241,222,0.06); border:1px solid var(--line);}
+  .step .eyebrow{color:var(--gold);}
+  .step h3{font-size:1.15rem; color:var(--paper); margin-top:6px;}
+  .step p{color:rgba(251,241,222,0.78); font-size:.92rem;}
+  @media (max-width: 860px){ .steps{grid-template-columns:1fr;} }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background:var(--gold); color:var(--ink);
+    border-radius:24px; padding:52px 44px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    margin:0 28px;
+  }
+  .cta-band h2{margin-bottom:.2em;}
+  .cta-band p{margin:0; max-width:46ch;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:rgba(251,241,222,0.75); padding:56px 0 28px; font-size:.88rem;}
+  .foot-grid{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:32px;}
+  .foot-grid h5{font-family:'IBM Plex Mono', monospace; text-transform:uppercase; letter-spacing:.1em; font-size:.72rem; color:var(--gold); margin:0 0 14px;}
+  .foot-grid ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px;}
+  .foot-grid a{text-decoration:none; color:inherit;}
+  .foot-grid a:hover{color:var(--gold);}
+  .foot-bottom{
+    max-width:1160px; margin:40px auto 0; padding:20px 28px 0; border-top:1px solid var(--line);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:.78rem;
+  }
+  @media (max-width: 780px){ .foot-grid{grid-template-columns:1fr 1fr;} .cta-band{padding:36px 26px;} }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" style="text-decoration:none; color:inherit;">
+      <span class="brand-mark" aria-hidden="true"></span> Anas
+    </a>
+    <nav class="links" aria-label="Primary">
+      <a href="#videos">Learn</a>
+      <a href="#posters">Opportunities</a>
+      <a href="#path">Quick Links</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <a class="nav-cta" href="#path">Get Started</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <p class="eyebrow">Free · Community-run · No fees, ever</p>
+        <h1>Your background<br>shouldn't decide<br><em>your future.</em></h1>
+        <p class="lede">It is a free career guidance portal built for first-generation learners and students from underserved communities — career videos, scholarship links, and mentors, all in one place.</p>
+        <div class="hero-ctas">
+          <a href="#videos" class="btn btn-primary">Watch career videos</a>
+          <a href="#path" class="btn btn-outline">Find scholarships &amp; exams</a>
+        </div>
+      </div>
+      <div class="sunrise-wrap" aria-hidden="true">
+        <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg">
+          <circle class="sun" cx="210" cy="190" r="78" fill="#F2A93B"/>
+          <g class="ray" stroke="#F2A93B" stroke-width="4" stroke-linecap="round" opacity="0.7">
+            <line x1="210" y1="60" x2="210" y2="20"/>
+            <line x1="120" y1="95" x2="92" y2="70"/>
+            <line x1="300" y1="95" x2="328" y2="70"/>
+            <line x1="70" y1="180" x2="30" y2="180"/>
+            <line x1="350" y1="180" x2="390" y2="180"/>
+          </g>
+          <path class="hill hill2" d="M0,260 C90,210 150,290 240,240 C300,205 350,250 420,220 L420,340 L0,340 Z" fill="#1F6F5C" opacity="0.9"/>
+          <path class="hill" d="M0,300 C80,260 170,320 260,270 C330,235 380,300 420,270 L420,340 L0,340 Z" fill="#16233F"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-strip">
+      <div class="strip-grid">
+        <div class="strip-item"><b>Career videos</b>Curated, free to watch</div>
+        <div class="strip-item"><b>Scholarships</b>Government &amp; private, verified links</div>
+        <div class="strip-item"><b>Skill courses</b>Certificates that employers recognise</div>
+        <div class="strip-item"><b>Mentor connect</b>Ask questions, get real answers</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== VIDEOS ===================== -->
+  <section id="videos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Watch &amp; learn</p>
+        <h2>Education &amp; career guidance videos</h2>
+        <p>Start with a playlist from the Government of India's Skill India initiative, then explore more free channels below — all data-friendly and free to watch.</p>
+      </div>
+
+      <div class="video-grid">
+        <div class="video-feature">
+          <div class="frame-wrap">
+            <iframe src="https://www.youtube.com/embed/videoseries?list=PLcDghvQhYD9KzNadBktMKNLwUMPgV2ZwT" title="Skill India career guidance playlist" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="cap">
+            <p class="eyebrow">Featured playlist</p>
+            <h3 style="font-size:1.1rem; margin:2px 0 0;">Skill India — career &amp; skilling videos</h3>
+          </div>
+        </div>
+
+        <div class="video-list">
+          <a class="video-card" href="https://www.youtube.com/msdeskillindia" target="_blank" rel="noopener">
+            <span class="video-thumb" style="background:linear-gradient(135deg,#1F6F5C,#16233F);"></span>
+            <span>
+              <h4>MSDE Skill India</h4>
+              <span>Official channel · vocational training &amp; skilling</span>
+            </span>
+          </a>
+          <a class="video-card" href="https://swayam.gov.in" target="_blank" rel="noopener">
+            <span class="video-thumb" style="background:linear-gradient(135deg,#F2A93B,#C4432B);"></span>
+            <span>
+              <h4>SWAYAM free courses</h4>
+              <span>Govt. of India · school &amp; college subjects, certificates</span>
+            </span>
+          </a>
+          <a class="video-card" href="https://www.ncs.gov.in" target="_blank" rel="noopener">
+            <span class="video-thumb" style="background:linear-gradient(135deg,#345C9C,#16233F);"></span>
+            <span>
+              <h4>NCS career counselling</h4>
+              <span>National Career Service · aptitude tests &amp; guidance</span>
+            </span>
+          </a>
+          <a class="video-card" href="https://www.youtube.com/@Skillupindians" target="_blank" rel="noopener">
+            <span class="video-thumb" style="background:linear-gradient(135deg,#3D9C82,#1F6F5C);"></span>
+            <span>
+              <h4>Skill Up India</h4>
+              <span>Certifications &amp; job-ready tech skills</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== POSTERS ===================== -->
+  <section id="posters" style="background:var(--paper-2);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Don't miss out</p>
+        <h2>Current opportunities</h2>
+        <p>Posters worth pinning up in your classroom or hostel notice board — tap any card to open the official page.</p>
+      </div>
+      <div class="poster-grid">
+        <a class="poster poster-1" href="https://scholarships.gov.in" target="_blank" rel="noopener">
+          <span class="tag">SCHOLARSHIP</span>
+          <div>
+            <h3>National Scholarship Portal</h3>
+            <p>One application, hundreds of central &amp; state scholarships for school and college students.</p>
+          </div>
+        </a>
+        <a class="poster poster-2" href="https://www.skillindiadigital.gov.in" target="_blank" rel="noopener">
+          <span class="tag">SKILLING</span>
+          <div>
+            <h3>Free Skill Certification</h3>
+            <p>Learn a trade, get certified, get matched to employers — at no cost.</p>
+          </div>
+        </a>
+        <a class="poster poster-3" href="https://www.ncs.gov.in" target="_blank" rel="noopener">
+          <span class="tag">JOB FAIR</span>
+          <div>
+            <h3>Rojgar Mela Listings</h3>
+            <p>Find the next job fair near you through the National Career Service.</p>
+          </div>
+        </a>
+        <a class="poster poster-4" href="https://www.buddy4study.com" target="_blank" rel="noopener">
+          <span class="tag">FUNDING</span>
+          <div>
+            <h3>Private &amp; NGO Scholarships</h3>
+            <p>Browse scholarships from foundations and companies, filtered by your class and community.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOTSPOT PATH / QUICK LINKS ===================== -->
+  <section id="path" class="path-wrap">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Your path, one stop at a time</p>
+        <h2>Quick-link hotspots</h2>
+        <p>Six real, official portals — bookmark this row and you'll rarely need to search for anything else.</p>
+      </div>
+
+      <div class="path-list">
+        <a class="stop" href="https://www.ncs.gov.in" target="_blank" rel="noopener">
+          <span class="num">01</span>
+          <h4>National Career Service</h4>
+          <p>Free aptitude tests, counselling &amp; job search — ncs.gov.in</p>
+          <span class="go">Open portal →</span>
+        </a>
+        <a class="stop" href="https://scholarships.gov.in" target="_blank" rel="noopener">
+          <span class="num">02</span>
+          <h4>National Scholarship Portal</h4>
+          <p>Apply to central &amp; state scholarships in one form.</p>
+          <span class="go">Open portal →</span>
+        </a>
+        <a class="stop" href="https://swayam.gov.in" target="_blank" rel="noopener">
+          <span class="num">03</span>
+          <h4>SWAYAM</h4>
+          <p>Free online courses with certificates, school to postgrad.</p>
+          <span class="go">Open portal →</span>
+        </a>
+        <a class="stop" href="https://www.skillindiadigital.gov.in" target="_blank" rel="noopener">
+          <span class="num">04</span>
+          <h4>Skill India Digital</h4>
+          <p>Vocational training, certification &amp; apprenticeships.</p>
+          <span class="go">Open portal →</span>
+        </a>
+        <a class="stop" href="https://www.digilocker.gov.in" target="_blank" rel="noopener">
+          <span class="num">05</span>
+          <h4>DigiLocker</h4>
+          <p>Store your certificates &amp; mark-sheets safely online, for free.</p>
+          <span class="go">Open portal →</span>
+        </a>
+        <a class="stop" href="https://www.buddy4study.com" target="_blank" rel="noopener">
+          <span class="num">06</span>
+          <h4>Buddy4Study</h4>
+          <p>Search private and NGO scholarships by state, class &amp; category.</p>
+          <span class="go">Open portal →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section id="how" class="band-dark">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How It works</p>
+        <h2 style="color:var(--paper);">Three steps, no fees</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <p class="eyebrow">Step 01</p>
+          <h3>Watch &amp; explore</h3>
+          <p>Browse career videos and find fields that match your interest, from the trades to the sciences.</p>
+        </div>
+        <div class="step">
+          <p class="eyebrow">Step 02</p>
+          <h3>Apply for support</h3>
+          <p>Use the hotspot links to apply for scholarships, free courses, and skill certifications.</p>
+        </div>
+        <div class="step">
+          <p class="eyebrow">Step 03</p>
+          <h3>Talk to a mentor</h3>
+          <p>Ask a real question and get guidance from a volunteer mentor in your field of interest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta-band">
+      <div>
+        <h2>Ready to take the first step?</h2>
+        <p>Every stop above is free and official. Start with whichever one solves today's problem.</p>
+      </div>
+      <a class="btn btn-green" href="#path">Go to quick links</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand" style="color:var(--paper); margin-bottom:10px;">
+        <span class="brand-mark" aria-hidden="true"></span> Anas
+      </div>
+      <p style="max-width:34ch; color:rgba(251,241,222,0.7);">A free, community-built career guidance portal for underprivileged students. This is a demo site — swap in your organisation's details before going live.</p>
+    </div>
+    <div>
+      <h5>Learn</h5>
+      <ul>
+        <li><a href="#videos">Career videos</a></li>
+        <li><a href="https://swayam.gov.in" target="_blank" rel="noopener">Free courses</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Opportunities</h5>
+      <ul>
+        <li><a href="https://scholarships.gov.in" target="_blank" rel="noopener">Scholarships</a></li>
+        <li><a href="https://www.skillindiadigital.gov.in" target="_blank" rel="noopener">Skill certificates</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Portal</h5>
+      <ul>
+        <li><a href="https://www.ncs.gov.in" target="_blank" rel="noopener">Career counselling</a></li>
+        <li><a href="https://www.digilocker.gov.in" target="_blank" rel="noopener">DigiLocker</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Career Guidance Portal · Demo site</span>
+    <span>Built for students, by Anas</span>
+  </div>
+</footer>
+
+</body>
+</html>
